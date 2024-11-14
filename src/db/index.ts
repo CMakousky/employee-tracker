@@ -25,7 +25,7 @@ export default class DB {
      // view all roles
      viewRoles() {
         return this.query(
-            "SELECT id, title, salary, department_id FROM roles"
+            "SELECT id, title, salary, department_id FROM role"
         );
     }
 
