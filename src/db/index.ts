@@ -25,7 +25,7 @@ export default class DB {
      // view all roles
      viewRoles() {
         return this.query(
-            "SELECT id, title, salary, department_id FROM role"
+            "SELECT id, job_title, salary, department_id FROM role"
         );
     }
 
@@ -44,16 +44,16 @@ export default class DB {
     }
 
      // add a role
-     addRole(title: string, salary: number, department_id: number) {
+     addRole(job_title: string, salary: number, department_id: number) {
         return this.query(
-            "INSERT INTO role(title, salary, department_id) VALUES ($1, $2, $3)", [title, salary, department_id]
+            "INSERT INTO role(job_title, salary, department_id) VALUES ($1, $2, $3)", [job_title, salary, department_id]
         );
      }
 
      // add an employee
      addEmployee(first_name: string, last_name: string, role_id: number, manager_id: number) {
         return this.query(
-            "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3)", 
+            "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)", 
             [first_name, last_name, role_id, manager_id]
         );
      }

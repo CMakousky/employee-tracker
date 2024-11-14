@@ -36,7 +36,7 @@ function loadMainPrompts() {
                     value: 'ADD_EMPLOYEE'
                 },
                 {
-                    name: 'Udate an employee role',
+                    name: 'Update an employee role',
                     value: 'UPDATE_EMPLOYEE_ROLE'
                 },
                 {
@@ -181,18 +181,38 @@ function addEmployee() {
     })
 };
 
-function updateEmployeeRole() {
+async function updateEmployeeRole() {
+    const employeeQueryResp = await db.viewEmployees();
+    console.table(employeeQueryResp.rows);
+
+    const roleQueryResp = await db.viewRoles();
+    console.table(roleQueryResp.rows);
+
+    const choicesArr1 = employeeQueryResp.rows.map(employeeID => {
+        return {
+            name: employeeID.first_name,
+            value: employeeID.id
+        }
+    });
+    const choicesArr2 = roleQueryResp.rows.map(roleID => {
+        return {
+            name: roleID.job_title,
+            value: roleID.id
+        }
+    });
+
     inquirer.prompt([
         {
             name: 'employee_id',
-            message: 'Enter the id of the employee whose role you want to modify.',
-            type: 'input'
+            message: 'Select the employee whose role you want to modify.',
+            type: 'list',
+            choices: choicesArr1
         },
         {
             name: 'role_id',
-            message: 'Enter the new role id number.',
-            // consider changing from input to choice prompt
-            type: 'input'
+            message: 'Select the new role id number.',
+            type: 'list',
+            choices: choicesArr2
         }
     ])
     .then(resp => {
