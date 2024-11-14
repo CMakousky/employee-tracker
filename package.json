@@ -3,14 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies":{
+    "asciiart-logo": "0.2.7",
     "inquirer": "^8.2.4",
     "pg": "^8.13.1",
-    "typescript": "5.6.3"
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.4",
+    "@types/pg": "^8.11.6",
+    "typescript": "^5.2.2"
   }
 }
