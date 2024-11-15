@@ -4,6 +4,7 @@ import DB from "./db/index.js";
 
 const db = new DB();
 
+// main menu prompts
 function loadMainPrompts() {
     inquirer.prompt([
         {
@@ -75,6 +76,7 @@ function loadMainPrompts() {
     })
 };
 
+// view all departments
 function viewDepartments() {
     db.viewDepartments()
     .then(({ rows }) => {
@@ -85,6 +87,7 @@ function viewDepartments() {
     .then(() => loadMainPrompts());
 };
 
+// view all employee roles
 function viewRoles() {
     db.viewRoles()
     .then(({ rows }) => {
@@ -95,6 +98,7 @@ function viewRoles() {
     .then(() => loadMainPrompts());
 };
 
+// view all employees
 function viewEmployees() {
     db.viewEmployees()
     .then(({ rows }) => {
@@ -105,6 +109,7 @@ function viewEmployees() {
     .then(() => loadMainPrompts());
 };
 
+// add a new department to the database
 function addDepartment() {
     inquirer.prompt([
         {
@@ -122,6 +127,7 @@ function addDepartment() {
     })
 };
 
+// add a new employee role to the database
 function addRole() {
     inquirer.prompt([
         {
@@ -149,13 +155,17 @@ function addRole() {
     })
 };
 
+// add a new employee to the database
 async function addEmployee() {
+    // call the viewEmployees function and store the results in employeeQueryResp
     const employeeQueryResp = await db.viewEmployees();
     console.table(employeeQueryResp.rows);
 
+    // call the viewRoles function and store the results in roleQueryResp
     const roleQueryResp = await db.viewRoles();
     console.table(roleQueryResp.rows);
 
+    // create an array of objects from the rows of roleQueryResp
     const choicesArr = roleQueryResp.rows.map(roleID => {
         return {
             name: roleID.job_title,
@@ -195,19 +205,24 @@ async function addEmployee() {
     })
 };
 
+// update the role of an employee whithin the database
 async function updateEmployeeRole() {
+    // call the viewEmployees function and store the results in employeeQueryResp
     const employeeQueryResp = await db.viewEmployees();
     console.table(employeeQueryResp.rows);
 
+    // call the viewRoles function and store the results in roleQueryResp
     const roleQueryResp = await db.viewRoles();
     console.table(roleQueryResp.rows);
 
+    // create an array of objects from the rows of employeeQueryResp
     const choicesArr1 = employeeQueryResp.rows.map(employeeID => {
         return {
             name: employeeID.first_name + ' ' + employeeID.last_name,
             value: employeeID.id
         }
     });
+    // create an array of objects from the rows of roleQueryResp
     const choicesArr2 = roleQueryResp.rows.map(roleID => {
         return {
             name: roleID.job_title,
@@ -238,11 +253,13 @@ async function updateEmployeeRole() {
     })
 };
 
+// give the user the option to quit the program
 function quit() {
     console.log('Goodbye!');
     process.exit();
 };
 
+// function to initialize the program
 function init() {
     const logoText = logo({ name: "Employee Tracker" }).render();
     console.log(logoText);
@@ -250,4 +267,5 @@ function init() {
     loadMainPrompts();
 };
 
+// initialize the program
 init();
