@@ -168,7 +168,7 @@ function addEmployee() {
         },
         {
             name: 'manager_id',
-            message: 'What is the manager id of this employee?',
+            message: 'What is the manager id for this employee?',
             type: 'number'
         }
     ])
@@ -190,7 +190,7 @@ async function updateEmployeeRole() {
 
     const choicesArr1 = employeeQueryResp.rows.map(employeeID => {
         return {
-            name: employeeID.first_name,
+            name: employeeID.first_name + ' ' + employeeID.last_name,
             value: employeeID.id
         }
     });
@@ -235,8 +235,5 @@ function init() {
 
     loadMainPrompts();
 };
-
-// db.viewDepartments()
-//     .then(({ rows }) => {console.table(rows)});
 
 init();
