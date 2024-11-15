@@ -16,9 +16,11 @@ A command-line app where the user can manage employees, departments, and employe
 
 ## Installation
 
-This app requires Node.js and PostreSQL to operate.
+This app requires Node.js and PostgreSQL to operate.
 
 Use your favorite package manager software to install asciiart-logo, inquirer, pg, dotenv, and typescript. Change the ".env.EXAMPLE" filename to ".env". Write the postgres password into the "DB_PASSWORD" field of the ".env" file. Navigate to the root directory of employee-tracker and enter "npm run build" into your command-line.
+
+Log into PostgreSQL and "\include" the "schema.sql" and "seeds.sql" files. This will initialize the employee_db database and seed it with data.
 
 ## Usage
 
