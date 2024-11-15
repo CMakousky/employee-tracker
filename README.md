@@ -3,7 +3,7 @@
 
 ## Description
 
-A command-line app where the user can manage employees, departments, and employee roles within an organization.
+A command-line app where the user can manage employees, departments, and employee roles within an SQL database.
 
 ## Table of Contents
 
