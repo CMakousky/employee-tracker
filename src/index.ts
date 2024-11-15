@@ -116,7 +116,7 @@ function addDepartment() {
     .then(resp => {
         db.addDepartment(resp.department_name)
         .then(() => {
-            console.log('Department added!');
+            console.log('Department added!\n');
             loadMainPrompts();
         })
     })
@@ -143,13 +143,26 @@ function addRole() {
     .then(resp => {
         db.addRole(resp.role_title, resp.salary, resp.department_id)
         .then(() => {
-            console.log('Role added!');
+            console.log('Role added!\n');
             loadMainPrompts();
         })
     })
 };
 
-function addEmployee() {
+async function addEmployee() {
+    const employeeQueryResp = await db.viewEmployees();
+    console.table(employeeQueryResp.rows);
+
+    const roleQueryResp = await db.viewRoles();
+    console.table(roleQueryResp.rows);
+
+    const choicesArr = roleQueryResp.rows.map(roleID => {
+        return {
+            name: roleID.job_title,
+            value: roleID.id
+        }
+    });
+
     inquirer.prompt([
         {
             name: 'first_name',
@@ -164,18 +177,19 @@ function addEmployee() {
         {
             name: 'role_id',
             message: 'What is the role id of this employee?',
-            type: 'number'
+            type: 'list',
+            choices: choicesArr
         },
         {
             name: 'manager_id',
-            message: 'What is the manager id for this employee?',
+            message: 'Which manager supervises this employee? Enter an employee id number.',
             type: 'number'
         }
     ])
     .then(resp => {
         db.addEmployee(resp.first_name, resp.last_name, resp.role_id, resp.manager_id)
         .then(() => {
-            console.log('Employee added!');
+            console.log('Employee added!\n');
             loadMainPrompts();
         })
     })
@@ -218,7 +232,7 @@ async function updateEmployeeRole() {
     .then(resp => {
         db.updateEmployeeRole(resp.employee_id, resp.role_id)
         .then(() => {
-            console.log(`Employee role changed!`);
+            console.log(`Employee role changed!\n`);
             loadMainPrompts();
         })
     })

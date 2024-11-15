@@ -22,7 +22,9 @@ Use your favorite package manager software to install asciiart-logo, inquirer, p
 
 ## Usage
 
-Navigate to the root directory of the employee-tracker app and enter "npm run start" into your command-line. Follow the on-screen prompts to navigate and manage the employee_db database.
+Navigate to the root directory of the employee-tracker app and enter "npm run start" into your command-line. Follow the on-screen prompts to navigate and manage the employee_db database. See the linked video for a short demo of the employee-tracker in action.
+
+[employee-tracker demo](https://drive.google.com/file/d/1GF5s7YXGxFxUrLF875i_Pw7Ng3CCiHVb/view?usp=sharing)
 
 ## Contributing
 
