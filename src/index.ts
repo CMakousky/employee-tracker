@@ -169,7 +169,7 @@ function addEmployee() {
         {
             name: 'manager_id',
             message: 'What is the manager id of this employee?',
-            type: 'input'
+            type: 'number'
         }
     ])
     .then(resp => {

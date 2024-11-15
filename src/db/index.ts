@@ -62,11 +62,22 @@ export default class DB {
      }
 
      // add an employee
-     addEmployee(first_name: string, last_name: string, role_id: number, manager_id: number) {
-        return this.query(
-            "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)", 
-            [first_name, last_name, role_id, manager_id]
-        );
+     addEmployee(first_name: string, last_name: string, role_id: number, manager_id?: number | null) {
+        let newEmployee;
+        console.log(manager_id);
+        if(Number.isNaN(manager_id)) {
+            newEmployee = this.query(
+                "INSERT INTO employee(first_name, last_name, role_id) VALUES ($1, $2, $3)", 
+                [first_name, last_name, role_id]
+            )
+        } else {
+            newEmployee = this.query(
+                "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)", 
+                [first_name, last_name, role_id, manager_id]
+            );
+        };
+
+        return newEmployee;
      }
 
      // update an employee role
