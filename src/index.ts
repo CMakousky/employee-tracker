@@ -132,12 +132,12 @@ function addRole() {
         {
             name: 'salary',
             message: 'What is the salary for this role?',
-            type: 'input'
+            type: 'number'
         },
         {
             name: 'department_id',
             message: 'What is the department id for this role?',
-            type: 'input'
+            type: 'number'
         }
     ])
     .then(resp => {
@@ -164,7 +164,7 @@ function addEmployee() {
         {
             name: 'role_id',
             message: 'What is the role id of this employee?',
-            type: 'input'
+            type: 'number'
         },
         {
             name: 'manager_id',

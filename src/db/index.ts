@@ -18,21 +18,32 @@ export default class DB {
      // view all departments
     viewDepartments() {
         return this.query(
-            "SELECT id, department_name FROM department"
+            "SELECT id, department_name \
+            FROM department"
         );
     }
 
      // view all roles
      viewRoles() {
         return this.query(
-            "SELECT id, job_title, salary, department_id FROM role"
+            "SELECT role.id, job_title, salary, department.department_name AS department \
+            FROM role \
+            JOIN department \
+                ON role.id = department.id"
         );
     }
 
      // view all employees
      viewEmployees() {
         return this.query(
-            "SELECT id, first_name, last_name, role_id, manager_id FROM employee"
+            "SELECT employee.id, employee.first_name, employee.last_name, role.job_title, role.salary, department.department_name AS department, CONCAT(manager.first_name, ' ', manager.last_name) AS manager_name \
+            FROM employee \
+            LEFT OUTER JOIN employee AS manager \
+                ON employee.manager_id = manager.id \
+            JOIN role \
+                ON employee.role_id = role.id \
+            JOIN department \
+                ON role.id = department.id"
         );
     }
     
